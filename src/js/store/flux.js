@@ -1,45 +1,40 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
+			contacts: [
 				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
+					name: 'Example Name',
+					email: 'example@example.co',
+					phone: '+1 234 567-8910',
+					address: '123 Nonesuch pl., Irving, TX',
+					imageUrl: 'https://placekitten.com/550'
 				}
 			]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			addContact: (newName, newEmail, newPhone, newAddress) => {
+				const currentContacts = getStore().contacts;
+				const idx = currentContacts.length;
+				const newContact = {
+					name: newName,
+					email: newEmail,
+					phone: newPhone,
+					address: newAddress,
+					imageUrl: 'https://placekitten.com/550'
+				}
+				const newContacts = currentContacts.toSpliced(idx, 0, newContact)
+				setStore({contacts: newContacts})
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			},
+			editContact: (contact, index) => {
+				const tempContacts = getStore().contacts.toSpliced(index, 1, contact);
+				setStore({ contacts: tempContacts });
+			  },
+			 deleteContact: (index) => {
+				setStore({contacts: getStore().contacts.toSpliced(index, 1) });
+			 }
 		}
-	};
+	}
 };
 
 export default getState;
