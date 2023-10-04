@@ -24,8 +24,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					'address': contact.address,
 					'agenda_slug': 'jdurtka',
 				}
-				// const newContacts = currentContacts.toSpliced(idx, 0, newContact)
-				// await setStore({contacts: newContacts})
 				const asyncPost = async () => {
 					console.log('running asyncPost')
 					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/', {
