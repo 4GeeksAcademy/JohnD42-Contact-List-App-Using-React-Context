@@ -9,42 +9,46 @@ const Contact = (props) => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [editing, setEditing] = useState(false)
-    const [imageUrl, setImageUrl] = useState('')
+    const [id, setId] = useState(0)
+
+    const imageUrl='placekitten.com/550'
     
     useEffect(() => {
-        setName(props.contact.name)
+        setName(props.contact.full_name)
         setAddress(props.contact.address)
         setPhone(props.contact.phone)
         setEmail(props.contact.email)
-        setImageUrl(props.contact.imageUrl)
+        setId(props.contact.id)
     },[])
 
-    useEffect(() => {
+    const clickHandler = () => {
         if(editing) {
             actions.editContact({
-                name: name,
+                full_name: name,
                 email: email,
                 phone: phone,
-                address: address
-              }, idx);
+                address: address,
+                id: id,
+            }, idx);
         }
-    },[editing])
+        setEditing(!editing)
+    }
 
     return (
         <div className="contact p-3 m-3 rounded">
-            <img className="contact-img" src={imageUrl}></img>
+            <img className="contact-img" src={imageUrl} alt={name}></img>
             <ul>
-                <li><h4>{editing ? <input value={name} onChange={ev => setName(ev.target.value)} /> : <span>{store.contacts[idx].name}</span>}</h4></li>
-                <li className="address contact-items"><i className="fa-solid fa-location-dot"></i>{editing ? <input value={address} onChange={ev => setAddress(ev.target.value)} /> : <span>{store.contacts[idx].address}</span>}</li>
-                <li className="contact-items"><i className="fa-solid fa-phone-flip"></i>{editing ? <input value={phone} onChange={ev => setPhone(ev.target.value)} /> : <span>{store.contacts[idx].phone}</span>}</li>
-                <li className="contact-items"><i className="fa-solid fa-envelope"></i>{editing ? <input value={email} onChange={ev => setEmail(ev.target.value)} /> : <span>{store.contacts[idx].email}</span>}</li>
+                <li><h4>{editing ? <input value={name} onChange={ev => setName(ev.target.value)} /> : <span>{name}</span>}</h4></li>
+                <li className="address contact-items m-1"><i className="fa-solid fa-location-dot m-1"></i>{editing ? <input value={address} onChange={ev => setAddress(ev.target.value)} /> : <span>{address}</span>}</li>
+                <li className="contact-items m-1"><i className="fa-solid fa-phone-flip m-1"></i>{editing ? <input value={phone} onChange={ev => setPhone(ev.target.value)} /> : <span>{phone}</span>}</li>
+                <li className="contact-items m-1"><i className="fa-solid fa-envelope m-1"></i>{editing ? <input value={email} onChange={ev => setEmail(ev.target.value)} /> : <span>{email}</span>}</li>
             </ul>
             <ul className="horizontal-ul">
                 <li>
-                    <button className="btn btn-light" onClick={() => {setEditing(!editing)}}>{editing ? 'Save' : <i className="fa-solid fa-pencil"></i>}</button>
+                    <button className="btn btn-light" onClick={clickHandler}>{editing ? 'Save' : <i className="fa-solid fa-pencil"></i>}</button>
                 </li>
                 <li>
-                    <button className="btn btn-light" onClick={() => {actions.deleteContact(idx)}}><i className="fa-regular fa-trash-can"></i></button>
+                    <button className="btn btn-light" onClick={() => {actions.deleteContact(props.contact,idx)}}><i className="fa-regular fa-trash-can"></i></button>
                 </li>
             </ul>
         </div>

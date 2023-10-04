@@ -1,7 +1,6 @@
 .contact {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
     border: 1px solid gray
 }
 
@@ -9,6 +8,7 @@
     border-radius: 50%;
     max-height: 10rem;
     align-items: center;
+    margin-left: 100px;
 }
 
 .btn-light {
