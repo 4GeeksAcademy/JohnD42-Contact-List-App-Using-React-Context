@@ -11,7 +11,7 @@ const Contact = (props) => {
     const [editing, setEditing] = useState(false)
     const [id, setId] = useState(0)
 
-    const imageUrl='placekitten.com/550'
+    const imageUrl='https://placekitten.com/550'
     
     useEffect(() => {
         setName(props.contact.full_name)
@@ -36,19 +36,19 @@ const Contact = (props) => {
 
     return (
         <div className="contact p-3 m-3 rounded">
-            <img className="contact-img" src={imageUrl} alt={name}></img>
+            <img className="contact-img" src={imageUrl} alt={props.contact.name}></img>
             <ul>
-                <li><h4>{editing ? <input value={name} onChange={ev => setName(ev.target.value)} /> : <span>{name}</span>}</h4></li>
-                <li className="address contact-items m-1"><i className="fa-solid fa-location-dot m-1"></i>{editing ? <input value={address} onChange={ev => setAddress(ev.target.value)} /> : <span>{address}</span>}</li>
-                <li className="contact-items m-1"><i className="fa-solid fa-phone-flip m-1"></i>{editing ? <input value={phone} onChange={ev => setPhone(ev.target.value)} /> : <span>{phone}</span>}</li>
-                <li className="contact-items m-1"><i className="fa-solid fa-envelope m-1"></i>{editing ? <input value={email} onChange={ev => setEmail(ev.target.value)} /> : <span>{email}</span>}</li>
+                <li><h4>{editing ? <input value={name} onChange={ev => setName(ev.target.value)} /> : <span>{props.contact.full_name}</span>}</h4></li>
+                <li className="address contact-items m-1"><i className="fa-solid fa-location-dot m-1"></i>{editing ? <input value={address} onChange={ev => setAddress(ev.target.value)} /> : <span>{props.contact.address}</span>}</li>
+                <li className="contact-items m-1"><i className="fa-solid fa-phone-flip m-1"></i>{editing ? <input value={phone} onChange={ev => setPhone(ev.target.value)} /> : <span>{props.contact.phone}</span>}</li>
+                <li className="contact-items m-1"><i className="fa-solid fa-envelope m-1"></i>{editing ? <input value={email} onChange={ev => setEmail(ev.target.value)} /> : <span>{props.contact.email}</span>}</li>
             </ul>
             <ul className="horizontal-ul">
                 <li>
                     <button className="btn btn-light" onClick={clickHandler}>{editing ? 'Save' : <i className="fa-solid fa-pencil"></i>}</button>
                 </li>
                 <li>
-                    <button className="btn btn-light" onClick={() => {actions.deleteContact(props.contact,idx)}}><i className="fa-regular fa-trash-can"></i></button>
+                    <button className="btn btn-light" onClick={() => actions.deleteContact(props.contact.id)}><i className="fa-regular fa-trash-can"></i></button>
                 </li>
             </ul>
         </div>

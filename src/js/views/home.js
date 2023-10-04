@@ -10,19 +10,7 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [apiContacts, setApiContacts] = useState([])
 
-	
-	useEffect(() => {
-		const asyncFetch = async () => {
-			const response = await fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jdurtka");
-			const apiContacts = await response.json();
-			setApiContacts(apiContacts)
-		}
-		asyncFetch()
-	},[store.contacts])
-
-	useEffect(() => {
-		actions.setContacts(apiContacts)
-	},[apiContacts])
+	console.log(store.contacts)
 
 	return (
 	<div className="container-fluid mt-5">

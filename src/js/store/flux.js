@@ -9,9 +9,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			setContacts: (apiContacts) => {
-				setStore({contacts: apiContacts})
-			},
+			asyncFetch: async () => {
+						const response = await fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jdurtka");
+						const newApiContacts = await response.json();
+						setStore({contacts: newApiContacts})
+					},
 			addContact: async (contact) => {
 				const currentContacts = getStore().contacts;
 				const idx = currentContacts.length;
@@ -20,11 +22,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					'email': contact.email,
 					'phone': contact.phone,
 					'address': contact.address,
-					'imageUrl': 'https://placekitten.com/550',
 					'agenda_slug': 'jdurtka',
 				}
-				const newContacts = currentContacts.toSpliced(idx, 0, newContact)
-				await setStore({contacts: newContacts})
+				// const newContacts = currentContacts.toSpliced(idx, 0, newContact)
+				// await setStore({contacts: newContacts})
 				const asyncPost = async () => {
 					console.log('running asyncPost')
 					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/', {
@@ -33,18 +34,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify({
-							"full_name": getStore().contacts[idx].full_name,
-							"email": getStore().contacts[idx].email,
-							"agenda_slug": "jdurtka",
-							"address": getStore().contacts[idx].address,
-							"phone": getStore().contacts[idx].phone,
-							}),
+						body: JSON.stringify(newContact),
 						json: true
 					})
 					console.log(response.json())
 				}
-				asyncPost()
+				await asyncPost()
+				getActions().asyncFetch()
 			},
 			editContact: async (contact, index) => {
 				console.log('editing contact')
@@ -69,27 +65,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				asyncPut()
 			  },
-			 deleteContact: async (contact, index) => {
-				const asyncDelete = async () => {
-					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact.id}`, {
+			 deleteContact: async (contactid) => {
+				let currentContacts = getStore().contacts
+				let filterContacts = currentContacts.filter((item) => {
+					console.log(item.id,contactid)
+					return item.id !== contactid
+				})
+				console.log(filterContacts)
+				try {
+						const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contactid}`, {
 						method: 'DELETE',    
 						cache: "no-cache",
 						headers: {
 							"Content-Type": "application/json",
 						},
 						json: true
-					})
-				}
-				await asyncDelete()
-				const asyncFetch = async () => {
-					const response = await fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jdurtka");
-					const apiContacts = await response.json();
-					console.log(apiContacts)
-					setStore({contacts: apiContacts})
-					console.log(getStore().contacts)
-				}
-				asyncFetch()
-			 }
+						})
+					const data = await response.json()
+					console.log(data)
+					if(data.msg === "Contact deleted successfully") {
+						setStore({contacts: filterContacts})
+						console.log(getStore().contacts)
+					}
+				} catch (error) { console.log('error', error) }
+			}
 		}
 	}
 };
