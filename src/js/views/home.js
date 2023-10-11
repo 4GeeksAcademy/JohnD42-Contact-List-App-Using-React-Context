@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from '../store/appContext'
 import "../../styles/home.css";
 import Contact from '../component/Contact.jsx'
+import Modal from '../component/Modal.jsx'
 
 
 export const Home = () => {
@@ -22,6 +23,7 @@ export const Home = () => {
 			</div>
 		</div>
 		{store.contacts.sort().map((contact, idx) => <Contact contact={contact} idx={idx} key={idx}/>)}
+		{store.contacts.sort().map((contact, idx) => <Modal id={contact.id} idx={idx}/>)}
 	</div>
 	)
 };

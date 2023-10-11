@@ -48,7 +48,7 @@ const Contact = (props) => {
                     <button className="btn btn-light" onClick={clickHandler}>{editing ? 'Save' : <i className="fa-solid fa-pencil"></i>}</button>
                 </li>
                 <li>
-                    <button className="btn btn-light" onClick={() => actions.deleteContact(props.contact.id)}><i className="fa-regular fa-trash-can"></i></button>
+                    <button className="btn btn-light" data-bs-target={`#modal${idx}`} data-bs-toggle="modal"><i className="fa-regular fa-trash-can"></i></button>
                 </li>
             </ul>
         </div>
