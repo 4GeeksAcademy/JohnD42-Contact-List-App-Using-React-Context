@@ -17,7 +17,7 @@ export const Home = () => {
 	<div className="container-fluid mt-5">
 		<div className="row">
 			<div className="col-2 offset-10">
-				<button className="btn btn-success" onClick={() => navigate("/addContact")}>
+				<button className="btn btn-success" onClick={() => navigate("/updateContact")}>
 					Add New Contact
 				</button>
 			</div>

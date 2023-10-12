@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Context } from '../store/appContext'
-import "../../styles/addcontact.css";
+import "../../styles/updatecontact.css";
 import { Link, useNavigate } from "react-router-dom";
 
-export const AddContact = () => {
+export const UpdateContact = () => {
     const { store, actions } = useContext(Context)
     const navigate = useNavigate()
 
