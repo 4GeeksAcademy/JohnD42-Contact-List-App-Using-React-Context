@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Context } from '../store/appContext'
 import "../../styles/updatecontact.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export const UpdateContact = () => {
     const { store, actions } = useContext(Context)
     const navigate = useNavigate()
-
+    const { idx } = useParams()
     const [newName, setNewName] = useState('');
     const [newAddress, setNewAddress] = useState('');
     const [newPhone, setNewPhone] = useState('');
@@ -14,24 +14,20 @@ export const UpdateContact = () => {
     const [adding, setAdding] = useState(false)
 
     const clickHandler = () => {
-        setAdding(true)
-        console.log(newName)
-        console.log(newAddress)
-        console.log(newPhone)
-        console.log(newEmail)
+        if(!idx) {
+            setAdding(true)
+        }
     }
 
     useEffect(() => {
         const asyncUseEffect = async () => {
             if(adding) {
-                const randId = Math.floor(Math.random()*10000000000)
                 await actions.addContact({
                     'full_name': newName,
                     'email': newEmail,
                     'phone': newPhone,
                     'address': newAddress,
                     'imageUrl': 'http://placekitten.com/550',
-                    'id': randId,
                     })
                 navigate('/')
                 }
