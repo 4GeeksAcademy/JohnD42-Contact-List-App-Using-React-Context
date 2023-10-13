@@ -22,8 +22,8 @@ export const Home = () => {
 				</button>
 			</div>
 		</div>
-		{store.contacts.sort().map((contact, idx) => <Contact contact={contact} idx={idx} key={idx}/>)}
-		{store.contacts.sort().map((contact, idx) => <Modal id={contact.id} idx={idx}/>)}
+		{store.contacts.map((contact, idx) => <Contact contact={contact} idx={idx} key={idx}/>)}
+		{store.contacts.map((contact, idx) => <Modal id={contact.id} idx={idx}/>)}
 	</div>
 	)
 };
