@@ -68,25 +68,25 @@ export const UpdateContact = () => {
                     Full Name
                 </div>
                 <div className="input-group col-12 my-3">
-                    <input type="text" className="form-control" placeholder={idx === undefined ? "Full Name" : `${newName}`} aria-label="Full Name" aria-describedby="basic-addon2" onChange={ev => setNewName(ev.target.value)}/>
+                    <input type="text" className="form-control" placeholder={idx === undefined ? "Full Name" : ''} value={`${newName}`} aria-label="Full Name" aria-describedby="basic-addon2" onChange={ev => setNewName(ev.target.value)}/>
                 </div>
                 <div className="col-12">
                     Email
                 </div>
                 <div className="input-group col-12 my-3">
-                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Email" : `${newEmail}`} aria-label="Enter Email" aria-describedby="basic-addon2" onChange={ev => setNewEmail(ev.target.value)}/>
+                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Email" : ''} value={`${newEmail}`} aria-label="Enter Email" aria-describedby="basic-addon2" onChange={ev => setNewEmail(ev.target.value)}/>
                 </div>
                 <div className="col-12">
                     Phone
                 </div>
                 <div className="input-group col-12 my-3">
-                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Phone" : `${newPhone}`} aria-label="Enter Phone" aria-describedby="basic-addon2" onChange={ev => setNewPhone(ev.target.value)}/>
+                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Phone" : ''} value={`${newPhone}`} aria-label="Enter Phone" aria-describedby="basic-addon2" onChange={ev => setNewPhone(ev.target.value)}/>
                 </div>
                 <div className="col-12">
                     Address
                 </div>
                 <div className="input-group col-12 my-3">
-                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Address" : `${newAddress}`} aria-label="Enter Address" aria-describedby="basic-addon2"onChange={ev => setNewAddress(ev.target.value)}/>
+                    <input type="text" className="form-control" placeholder={idx === undefined ? "Enter Address" : ''} value={`${newAddress}`} aria-label="Enter Address" aria-describedby="basic-addon2"onChange={ev => setNewAddress(ev.target.value)}/>
                 </div>
                 <div className="col-12">
                     <button className="btn btn-primary w-100 h-100" onClick={clickHandler}>Save</button>
