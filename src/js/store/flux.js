@@ -9,83 +9,70 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
-			asyncFetch: async () => {
+			asyncFetch: async (url, method, body) => {
 				try {
-					const response = await fetch("https://playground.4geeks.com/apis/fake/contact/agenda/jdurtka");
-					const newApiContacts = await response.json();
-					setStore({contacts: newApiContacts})
-				} catch (error) {console.log('error',error)}
+					const response = await fetch(url, {
+						method: method,    
+						cache: "no-cache",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: body,
+						json: true
+					})
+					if(method === 'GET') {
+						const newApiContacts = await response.json();
+						setStore({contacts: newApiContacts})
+					}
+				} catch (error) {console.log('error', error)}
 			},
-			addContact: async (contact) => {
+			asyncGet: async () => {
+				const url = 'https://playground.4geeks.com/apis/fake/contact/agenda/jdurtka'
+				const method = 'GET'
+				const body = undefined
+				getActions().asyncFetch(url, method, body)
+			},
+			addContact: (contact) => {
 				const currentContacts = getStore().contacts;
 				const idx = currentContacts.length;
-				const newContact = {
+				const newContacts = currentContacts.toSpliced(0,0,contact)
+				setStore({contacts: newContacts})
+				const url = 'https://playground.4geeks.com/apis/fake/contact/'
+				const method = 'POST'
+				const body = JSON.stringify({
 					'full_name': contact.full_name,
 					'email': contact.email,
 					'phone': contact.phone,
 					'address': contact.address,
 					'agenda_slug': 'jdurtka',
-				}
-				const asyncPost = async () => {
-					try {
-					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/', {
-						method: 'POST',    
-						cache: "no-cache",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify(newContact),
-						json: true
-					})
-					} catch (error) {console.log('error', error)}
-				}
-				await asyncPost()
-				getActions().asyncFetch()
+				})
+				getActions().asyncFetch(url, method, body)
 			},
 			editContact: async (contact, index) => {
 				console.log('editing contact')
 				const tempContacts = getStore().contacts.toSpliced(index, 1, contact);
 				await setStore({ contacts: tempContacts });
-				const asyncPut = async () => {
-					try {
-						const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contact.id}`, {
-							method: 'PUT',    
-							cache: "no-cache",
-							headers: {
-								"Content-Type": "application/json",
-							},
-							body: JSON.stringify({
-								"full_name": getStore().contacts[index].full_name,
-								"email": getStore().contacts[index].email,
-								"agenda_slug": "jdurtka",
-								"address": getStore().contacts[index].address,
-								"phone": getStore().contacts[index].phone,
-								}),
-							json: true
-						})
-					} catch (error) {console.log('error', error)}
-				}
-				asyncPut()
+				const url = `https://playground.4geeks.com/apis/fake/contact/${contact.id}`
+				const method = 'PUT'
+				const body = JSON.stringify({
+					"full_name": contact.full_name,
+					"email": contact.email,
+					"agenda_slug": "jdurtka",
+					"address": contact.address,
+					"phone": contact.phone,
+					})
+				getActions().asyncFetch(url, method, body)
 			  },
 			 deleteContact: async (contactid) => {
 				let currentContacts = getStore().contacts
 				let filterContacts = currentContacts.filter((item) => {
 					return item.id !== contactid
 				})
-				try {
-						const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${contactid}`, {
-						method: 'DELETE',    
-						cache: "no-cache",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						json: true
-						})
-					const data = await response.json()
-					if(data.msg === "Contact deleted successfully") {
-						setStore({contacts: filterContacts})
-					}
-				} catch (error) {console.log('error', error) }
+				setStore({contacts: filterContacts})
+				const url = `https://playground.4geeks.com/apis/fake/contact/${contactid}`
+				const method = 'DELETE'
+				const body = JSON.stringify('')
+				const data = getActions().asyncFetch(url, method, body);
 			}
 		}
 	}
