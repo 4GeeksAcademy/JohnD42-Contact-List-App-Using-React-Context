@@ -1,6 +1,6 @@
 .contact {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 4fr;
     border: 1px solid gray
 }
 
@@ -34,4 +34,5 @@
 
 .horizontal-ul {
     display: flex;
+    justify-content: end;
 }
