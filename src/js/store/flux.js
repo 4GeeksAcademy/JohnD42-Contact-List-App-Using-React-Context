@@ -34,7 +34,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addContact: (contact) => {
 				const currentContacts = getStore().contacts;
-				const idx = currentContacts.length;
 				const newContacts = currentContacts.toSpliced(0,0,contact)
 				setStore({contacts: newContacts})
 				const url = 'https://playground.4geeks.com/apis/fake/contact/'
@@ -72,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const url = `https://playground.4geeks.com/apis/fake/contact/${contactid}`
 				const method = 'DELETE'
 				const body = JSON.stringify('')
-				const data = getActions().asyncFetch(url, method, body);
+				getActions().asyncFetch(url, method, body);
 			},
 			submitHandler: (e, idx) => {
 				if(idx === undefined) {
