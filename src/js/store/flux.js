@@ -72,13 +72,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const body = JSON.stringify('');
 				getActions().asyncFetch(url, method, body);
 			},
-			submitHandler: (e, idx) => {
+			formSubmitHandler: (e, idx) => {
 				if(idx === undefined) {
 					getActions().addContact({
 						'full_name':e.target.elements.full_name.value,
 						'email': e.target.elements.email.value,
 						'phone': e.target.elements.phone.value,
-						'address': e.target.elements.address.value
+						'address': e.target.elements.address.value,
 					})
 				}
 				else {

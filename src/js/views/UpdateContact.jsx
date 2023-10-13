@@ -10,7 +10,7 @@ export const UpdateContact = () => {
 
     const submitHandler = async e => {
         e.preventDefault();
-        await actions.submitHandler(e, idx);
+        await actions.formSubmitHandler(e, idx);
         navigate('/');
     }
 
