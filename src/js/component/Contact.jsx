@@ -15,12 +15,12 @@ const Contact = (props) => {
 
     return (
         <div className="contact p-3 m-3 rounded">
-            <img className="contact-img" src={imageUrl} alt={props.contact.name}></img>
+            <img className="contact-img" src={imageUrl} alt={store.contacts[idx].full_name}></img>
             <ul>
-                <li><h4><span>{props.contact.full_name}</span></h4></li>
-                <li className="address contact-items m-1"><i className="fa-solid fa-location-dot m-1"></i><span>{props.contact.address}</span></li>
-                <li className="contact-items m-1"><i className="fa-solid fa-phone-flip m-1"></i><span>{props.contact.phone}</span></li>
-                <li className="contact-items m-1"><i className="fa-solid fa-envelope m-1"></i><span>{props.contact.email}</span></li>
+                <li><h4><span>{store.contacts[idx].full_name}</span></h4></li>
+                <li className="address contact-items m-1"><i className="fa-solid fa-location-dot m-1"></i><span>{store.contacts[idx].address}</span></li>
+                <li className="contact-items m-1"><i className="fa-solid fa-phone-flip m-1"></i><span>{store.contacts[idx].phone}</span></li>
+                <li className="contact-items m-1"><i className="fa-solid fa-envelope m-1"></i><span>{store.contacts[idx].email}</span></li>
             </ul>
             <ul className="horizontal-ul">
                 <li>

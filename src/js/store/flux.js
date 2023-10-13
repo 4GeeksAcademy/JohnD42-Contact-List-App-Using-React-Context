@@ -73,6 +73,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const method = 'DELETE'
 				const body = JSON.stringify('')
 				const data = getActions().asyncFetch(url, method, body);
+			},
+			submitHandler: (e, idx) => {
+				if(idx === undefined) {
+					getActions().addContact({
+						'full_name':e.target.elements.full_name.value,
+						'email': e.target.elements.email.value,
+						'phone': e.target.elements.phone.value,
+						'address': e.target.elements.address.value
+					})
+				}
+				else {
+					getActions().editContact({
+						'full_name': e.target.elements.full_name.value,
+						'email': e.target.elements.email.value,
+						'phone': e.target.elements.phone.value,
+						'address': e.target.elements.address.value,
+						'id': getStore().contacts[idx].id
+					},idx)
+				}
 			}
 		}
 	}

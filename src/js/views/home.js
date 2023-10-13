@@ -11,8 +11,6 @@ export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [apiContacts, setApiContacts] = useState([])
 
-	console.log(store.contacts)
-
 	return (
 	<div className="container-fluid mt-5">
 		<div className="row">
@@ -22,8 +20,8 @@ export const Home = () => {
 				</button>
 			</div>
 		</div>
-		{store.contacts.map((contact, idx) => <Contact contact={contact} idx={idx} key={idx}/>)}
-		{store.contacts.map((contact, idx) => <Modal id={contact.id} idx={idx}/>)}
+		{store.contacts.sort().map((contact, idx) => <Contact idx={idx} key={idx}/>)}
+		{store.contacts.sort().map((contact, idx) => <Modal id={contact.id} idx={idx}/>)}
 	</div>
 	)
 };
