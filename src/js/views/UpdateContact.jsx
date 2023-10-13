@@ -18,7 +18,7 @@ export const UpdateContact = () => {
         <form className="container" onSubmit={submitHandler}>
             <div className="row">
                 <div className="col-12 header">
-                    <h2>Update contacts</h2>
+                    <h2>{idx === undefined ? 'Add New Contact' : 'Update Contact'}</h2>
                 </div>
                 <div className="col-12">
                     Full Name
