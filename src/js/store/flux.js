@@ -13,7 +13,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					const response = await fetch(url, {
 						method: method,    
-						cache: "no-cache",
 						headers: {
 							"Content-Type": "application/json",
 						},
