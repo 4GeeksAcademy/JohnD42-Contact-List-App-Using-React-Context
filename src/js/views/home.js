@@ -9,7 +9,7 @@ import Modal from '../component/Modal.jsx'
 export const Home = () => {
 	const navigate = useNavigate();
 	const { store, actions } = useContext(Context);
-	const [apiContacts, setApiContacts] = useState([])
+	const [apiContacts, setApiContacts] = useState([]);
 
 	return (
 	<div className="container-fluid mt-5">

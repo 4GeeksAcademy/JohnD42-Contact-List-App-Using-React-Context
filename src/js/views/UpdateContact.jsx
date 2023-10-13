@@ -4,14 +4,14 @@ import "../../styles/updatecontact.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 export const UpdateContact = () => {
-    const { store, actions } = useContext(Context)
-    const navigate = useNavigate()
-    const { idx } = useParams()
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    const { idx } = useParams();
 
     const submitHandler = async e => {
-        e.preventDefault()
-        await actions.submitHandler(e, idx)
-        navigate('/')
+        e.preventDefault();
+        await actions.submitHandler(e, idx);
+        navigate('/');
     }
 
     return (

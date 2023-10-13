@@ -3,14 +3,14 @@ import { Context } from '../store/appContext'
 import { useNavigate } from "react-router-dom";
 
 const Contact = (props) => {
-    const { store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
     const idx = props.idx;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const imageUrl='https://placekitten.com/550'
+    const imageUrl='https://placekitten.com/550';
 
     const clickHandler = () => {
-        navigate(`/updateContact/${idx}`)
+        navigate(`/updateContact/${idx}`);
     }
 
     return (

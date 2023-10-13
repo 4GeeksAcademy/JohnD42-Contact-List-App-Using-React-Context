@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from '../store/appContext'
 
 const Modal = (props) => {
-    const { store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
     return (
         <div className="modal fade" id={`modal${props.idx}`} tabIndex="-1" role="dialog" aria-labelledby="Are you sure?" aria-hidden="true">
             <div className="modal-dialog" role="document">
