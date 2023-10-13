@@ -20,19 +20,19 @@ export const UpdateContact = () => {
                 <div className="col-12 header">
                     <h2>{idx === undefined ? 'Add New Contact' : 'Update Contact'}</h2>
                 </div>
-                <label htmlFor='text'>Full Name</label>
+                <label>Full Name</label>
                 <div className="input-group col-12 my-3">
                     <input name="full_name" type="text" className="form-control" placeholder={idx === undefined ? "Full Name" : store.contacts[idx].full_name} aria-label="Full Name" aria-describedby="basic-addon2"/>
                 </div>
-                <label htmlFor='text'>Email</label>
+                <label>Email</label>
                 <div className="input-group col-12 my-3">
                     <input name="email" type="text" className="form-control" placeholder={idx === undefined ? "Enter Email" : store.contacts[idx].email} aria-label="Enter Email" aria-describedby="basic-addon2"/>
                 </div>
-                <label htmlFor='text'>Phone</label>
+                <label>Phone</label>
                 <div className="input-group col-12 my-3">
                     <input name="phone" type="text" className="form-control" placeholder={idx === undefined ? "Enter Phone" : store.contacts[idx].phone} aria-label="Enter Phone" aria-describedby="basic-addon2"/>
                 </div>
-                <label htmlFor='text'>Address</label>
+                <label>Email</label>
                 <div className="input-group col-12 my-3">
                     <input name="address" type="text" className="form-control" placeholder={idx === undefined ? "Enter Address" : store.contacts[idx].address} aria-label="Enter Address" aria-describedby="basic-addon2"/>
                 </div>
