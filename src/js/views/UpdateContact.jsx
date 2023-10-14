@@ -7,22 +7,19 @@ export const UpdateContact = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const { idx } = useParams();
+    const [fullName, setFullName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
 
-    if(idx === undefined) {
-        const contact = {
-            full_name: '',
-            phone: '',
-            email: '',
-            address: '',
+    useEffect (() => {
+        if(idx !== undefined) {
+            setFullName(store.contacts[idx].full_name)
+            setAddress(store.contacts[idx].address)
+            setPhone(store.contacts[idx].phone)
+            setEmail(store.contacts[idx].email)
         }
-    } else {
-        const contact = store.contacts[idx]
-    }
-    const contact = store.contacts[idx]
-    const [fullName, setFullName] = useState(contact.full_name)
-    const [phone, setPhone] = useState(contact.phone)
-    const [email, setEmail] = useState(contact.email)
-    const [address, setAddress] = useState(contact.address)
+    },[])
 
     const submitHandler = async e => {
         e.preventDefault();
@@ -48,7 +45,7 @@ export const UpdateContact = () => {
                 <div className="input-group col-12 my-3">
                     <input name="phone" type="text" className="form-control" placeholder={idx === undefined ? "Enter Phone" : store.contacts[idx].phone} value={phone} onChange={ev => setPhone(ev.target.value)} aria-label="Enter Phone" aria-describedby="basic-addon2"/>
                 </div>
-                <label>Email</label>
+                <label>Address</label>
                 <div className="input-group col-12 my-3">
                     <input name="address" type="text" className="form-control" placeholder={idx === undefined ? "Enter Address" : store.contacts[idx].address} value={address} onChange={ev => setAddress(ev.target.value)} aria-label="Enter Address" aria-describedby="basic-addon2"/>
                 </div>
